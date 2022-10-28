@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet{
         loginDao = new LoginDao();
     }
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/login.jsp");
         dispatcher.forward(req, res);
     }
 
@@ -39,10 +39,8 @@ public class LoginServlet extends HttpServlet{
             if (loginDao.validate(login)) {
                 HttpSession session = req.getSession();
                 session.setAttribute("username",username);
-                res.sendRedirect("loginsuccess.jsp");
+                res.sendRedirect("/profile");
             } else {
-                //HttpSession session = request.getSession();
-                //session.setAttribute("user", username);
                 res.sendRedirect("/");
             }
         } catch (ClassNotFoundException e) {

@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login Module</title>
+<title>Error</title>
 </head>
 <body>
-<a href="/register">Register</a>
-<a href="/login">Login</a>
+<h1>Error</h1>
 </body>
 </html>

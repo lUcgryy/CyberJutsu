@@ -20,21 +20,19 @@ public class UserServlet extends HttpServlet {
         super();
     }
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("register.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/register.jsp");
         dispatcher.forward(req, res);
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        String email = req.getParameter("email");
-        String description = req.getParameter("description");
-        User user = new User(username, password, email, description);
+        User user = new User(username, password);
         try {
             userdao.registerUser(user);
         } catch(ClassNotFoundException e) {
             e.printStackTrace();
         }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("success.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/success.jsp");
         dispatcher.forward(req, res);
     }
         

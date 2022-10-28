@@ -3,7 +3,6 @@ package com.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,11 +15,13 @@ public class LogoutServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		res.sendRedirect("/");
 		PrintWriter out = res.getWriter();
-		RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
-		dispatcher.forward(req, res);
-		HttpSession session = req.getSession();
-		session.invalidate();
+		HttpSession session = req.getSession(false);
+		System.out.println("User="+session.getAttribute("username"));
+    	if(session != null){
+    		session.invalidate();
+    	}
 		
 		out.print("Log out successfully");
 		out.close();

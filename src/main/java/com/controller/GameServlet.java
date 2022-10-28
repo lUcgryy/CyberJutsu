@@ -8,20 +8,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-@WebServlet("/")
-public class IndexServlet extends HttpServlet{
+import javax.servlet.http.HttpSession;
 
+@WebServlet("/game")
+public class GameServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	 
-    public IndexServlet() {
+    public GameServlet() {
     	super();
     }
  
     public void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-    	String abc = "123";
-    	req.setAttribute("abc", abc);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/index.jsp");
-        dispatcher.forward(req, res);
+		HttpSession session = req.getSession(false);
+		if (session.getAttribute("username") == null) {
+			res.sendRedirect("/");
+		} else {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/game.jsp");
+			dispatcher.forward(req, res);
+		}
     }
 }
