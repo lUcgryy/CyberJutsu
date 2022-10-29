@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet{
             if (loginDao.validate(login)) {
                 HttpSession session = req.getSession();
                 session.setAttribute("username",username);
-                res.sendRedirect("/profile");
+                res.sendRedirect("/game");
             } else {
                 res.sendRedirect("/");
             }

@@ -12,17 +12,12 @@ public class User {
 	private String role;
 	private boolean kyc;
 	
-	
+	public User() {
+		
+	}
 	public User(String username, String password) {
 	    this.username = username;
 	    this.password = password;
-	    this.email = "";
-	    this.bio = "";
-	    this.money = 1000;
-	    this.creditCard = "";
-	    this.avatar = "";
-	    this.role = "user";
-	    this.kyc = false;
 	}
 	
 	public String getId() {

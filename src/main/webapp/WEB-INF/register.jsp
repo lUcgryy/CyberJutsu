@@ -22,6 +22,7 @@
                 </table>
                 <input type="submit" value="Submit">
             </form>
+            <p>${noti }</p>
         </div>
     </body>
 </html>

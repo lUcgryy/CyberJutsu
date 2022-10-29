@@ -20,13 +20,9 @@ public class LoginDao {
             .getConnection("jdbc:mysql://localhost:3306/cyberjutsu", "root", "123456");
 
             String query = "Select * from users where username = '" + login.getUsername() + "' and password = '" + login.getPassword() + "'";
-            System.out.println(query);
             Statement st = connection.createStatement();
             ResultSet result = st.executeQuery(query);
-            status = result.next();
-            System.out.println(result);
-            
-            
+            status = result.next();                     
         } catch (SQLException e) {
             // process sql exception
             printSQLException(e);

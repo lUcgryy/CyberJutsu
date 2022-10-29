@@ -16,10 +16,12 @@ import com.model.User;
 public class UserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private UserDao userdao = new UserDao();
+    String noti = "";
     public UserServlet() {
         super();
     }
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    	req.setAttribute("noti", noti);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/register.jsp");
         dispatcher.forward(req, res);
     }
@@ -28,12 +30,20 @@ public class UserServlet extends HttpServlet {
         String password = req.getParameter("password");
         User user = new User(username, password);
         try {
+        	if (userdao.checkUser(user)) {
             userdao.registerUser(user);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/login.jsp");
+            dispatcher.forward(req, res);
+        	} else {
+        		noti = "Trùng tên đăng nhập rồi";
+        		req.setAttribute("noti", noti);
+        		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/register.jsp");
+                dispatcher.forward(req, res);
+        	}
         } catch(ClassNotFoundException e) {
             e.printStackTrace();
         }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/success.jsp");
-        dispatcher.forward(req, res);
+
     }
         
 

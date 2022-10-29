@@ -26,6 +26,7 @@ public class ProfileDao {
             	list.add(result.getInt("money"));
             	list.add(result.getString("credit_card"));
             	list.add(result.getString("avatar"));
+            	list.add(result.getBoolean("kyc"));
             	break;
             }
 			
@@ -33,6 +34,27 @@ public class ProfileDao {
 			printSQLException(e);
 		}
 		return list;
+	}
+	public void updateInfo(String id ,String email, String creditCard, String bio, String avatar, String kyc) throws ClassNotFoundException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		try {
+			String kycCheck;
+			if (kyc != "") {
+				kycCheck = "true";
+			} else {
+				kycCheck = "false";
+			}
+			Connection connection = DriverManager
+		            .getConnection("jdbc:mysql://localhost:3306/cyberjutsu", "root", "123456");
+			String query = "Update users"
+					+ " Set email = '" + email + "', credit_card = '" + creditCard + "', bio = '" + bio + "', avatar = '" + avatar + "', kyc = " + kycCheck
+					+ " where id = " + id;
+			System.out.println(query);
+			Statement st = connection.createStatement();
+			st.executeUpdate(query);
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
 	}
 	
 	private void printSQLException(SQLException ex) {

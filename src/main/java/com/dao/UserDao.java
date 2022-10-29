@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.model.User;
 
@@ -34,7 +35,7 @@ public class UserDao {
             preparedStatement.execute();
             ResultSet rs = preparedStatement.getResultSet();
             while (rs.next()){            
-            	user.setId(Integer.toString(rs.getInt("id")));
+            	
             	break;
             }
             System.out.println(user.getId());
@@ -43,6 +44,21 @@ public class UserDao {
         }     
         return result;
     }
+	public boolean checkUser(User user) throws ClassNotFoundException{
+		boolean check = false;
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try {
+        	Connection connection = DriverManager
+                    .getConnection("jdbc:mysql://localhost:3306/cyberjutsu", "root", "123456");
+        	String query = "Select * from users where username = '" + user.getUsername() + "'";
+        	Statement st = connection.createStatement();
+        	ResultSet rs = st.executeQuery(query);
+        	check = !rs.next();
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return check;
+	}
 	private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {
             if (e instanceof SQLException) {
