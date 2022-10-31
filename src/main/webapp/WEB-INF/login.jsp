@@ -8,7 +8,6 @@
 </head>
 <body>
  <div align="center">
- <p>Counter: ${Attempt }</p>
  <p>${warning }</p>
   <h1>Login Form</h1>
   <form action="<%=request.getContextPath()%>/login" method="post">
