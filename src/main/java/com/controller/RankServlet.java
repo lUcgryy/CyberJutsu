@@ -26,12 +26,13 @@ public class RankServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
-		if (session.getAttribute("username") == null) {
+		if (!checkSession(session)) {
 			res.sendRedirect("/");
 		} else {
 			JSONArray jsons = new JSONArray();
 			try {
 				ArrayList<User> users = rankDao.getData();
+				System.out.println(users);
 				for (User user : users) {
 					JSONObject json = new JSONObject();
 					json.put("id", user.getId());
@@ -51,4 +52,7 @@ public class RankServlet extends HttpServlet{
 			dispatcher.forward(req, res);
 		}
 	}
+	private boolean checkSession(HttpSession session) {
+    	return session.getAttribute("username") != null;
+    }
 }

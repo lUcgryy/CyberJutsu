@@ -35,7 +35,7 @@ public class UserDao {
             preparedStatement.execute();
             ResultSet rs = preparedStatement.getResultSet();
             while (rs.next()){            
-            	
+            	user.setId(Integer.toString(rs.getInt("id")));
             	break;
             }
             System.out.println(user.getId());

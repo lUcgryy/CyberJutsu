@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 @WebServlet("/")
 public class IndexServlet extends HttpServlet{
 
@@ -19,9 +20,19 @@ public class IndexServlet extends HttpServlet{
  
     public void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-    	String abc = "123";
-    	req.setAttribute("abc", abc);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/index.jsp");
-        dispatcher.forward(req, res);
+    	HttpSession session = req.getSession(false);
+    	if (session == null) {
+    		session = req.getSession();
+    	}
+    	if (!checkSession(session) || session == null) {
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/index.jsp");
+            dispatcher.forward(req, res);
+    	} else {
+    		res.sendRedirect("/game");
+    	}
+
+    }
+    private boolean checkSession(HttpSession session) {
+    	return session.getAttribute("username") != null;
     }
 }

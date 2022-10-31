@@ -82,4 +82,11 @@ public class User {
 	public void setKyc(boolean kyc) {
 		this.kyc = kyc;
 	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", bio="
+				+ bio + ", money=" + money + ", creditCard=" + creditCard + ", avatar=" + avatar + ", role=" + role
+				+ ", kyc=" + kyc + "]";
+	}
+	
 }

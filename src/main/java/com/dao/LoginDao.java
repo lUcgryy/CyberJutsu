@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.model.Login;
+import com.model.User;
 
 
 public class LoginDao {
-	public boolean validate(Login login) throws ClassNotFoundException {
+	public boolean validate(User user) throws ClassNotFoundException {
         boolean status = false;
 
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -19,7 +19,7 @@ public class LoginDao {
         	Connection connection = DriverManager
             .getConnection("jdbc:mysql://localhost:3306/cyberjutsu", "root", "123456");
 
-            String query = "Select * from users where username = '" + login.getUsername() + "' and password = '" + login.getPassword() + "'";
+            String query = "Select * from users where username = '" + user.getUsername() + "' and password = '" + user.getPassword() + "'";
             Statement st = connection.createStatement();
             ResultSet result = st.executeQuery(query);
             status = result.next();                     

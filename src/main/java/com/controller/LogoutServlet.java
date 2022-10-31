@@ -16,14 +16,9 @@ public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.sendRedirect("/");
-		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession(false);
-		System.out.println("User="+session.getAttribute("username"));
-    	if(session != null){
+    	if(session.getAttribute("username") != null){
     		session.invalidate();
     	}
-		
-		out.print("Log out successfully");
-		out.close();
 	}	
 }

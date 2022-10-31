@@ -21,11 +21,14 @@ public class GameServlet extends HttpServlet{
     public void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
-		if (session.getAttribute("username") == null) {
-			res.sendRedirect("/");
+		if (checkSession(session)) {
+			res.sendRedirect("/login");
 		} else {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/game.jsp");
 			dispatcher.forward(req, res);
 		}
+    }
+    private boolean checkSession(HttpSession session) {
+    	return session.getAttribute("username") == null;
     }
 }

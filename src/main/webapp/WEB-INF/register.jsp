@@ -19,6 +19,10 @@
                         <td>Password</td>
                         <td><input type="password" name="password"></td>
                     </tr>
+                    <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" name="confirmPassword"></td>
+                    </tr>
                 </table>
                 <input type="submit" value="Submit">
             </form>

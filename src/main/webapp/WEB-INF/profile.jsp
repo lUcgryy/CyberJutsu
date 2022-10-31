@@ -8,6 +8,7 @@
 </head>
 <body>
 <h1>Welcome to profile page</h1>
+	<p>${adminFlag }</p>
     <div align="center">
     	<p>${json }</p>
         <h1>UPDATE</h1>
